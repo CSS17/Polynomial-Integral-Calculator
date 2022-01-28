@@ -15,16 +15,27 @@ for i in range(polynomial_degree+1):
 
 start=int(input("İntegral Başlangıcı:"))
 end=int(input("İntegral end:"))
-point_number=(end-start)/0.5
+if end>=start:
+    point_number=(end-start)/0.5
+else:
+    point_number=(start-end)/0.5
+
 lenght=len(coefficient)
 sum=0
-while start<=end:
-    for i in range(lenght):
-        sum+=(coefficient[i])*start**i
-    point_values.append(sum)
-    sum=0
-    start+=0.25
-           
+if end>=start:
+    while start<=end:
+        for i in range(lenght):
+            sum+=(coefficient[i])*start**i
+        point_values.append(sum)
+        sum=0
+        start+=0.25
+else:
+    while end<=start:
+        for i in range(lenght):
+            sum+=(coefficient[i])*end**i
+        point_values.append(sum)
+        sum=0
+        end+=0.25            
 print(point_values)  
 
 for i in range(len(point_values)):
@@ -37,10 +48,12 @@ for i in range(len(point_values)):
     else:
         print("intermediate number",str(point_values[i]))
         result+=4*point_values[i]
-print(result)       
-result=result*(0.5/6)
+print(result)    
+if start>=end:   
+    result=result*(0.5/6)
+else:
+    result=result*(0.5/6)*-1
 print(result)
-
 
 
 
